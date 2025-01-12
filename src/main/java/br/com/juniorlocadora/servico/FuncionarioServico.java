@@ -1,7 +1,6 @@
 package br.com.juniorlocadora.servico;
 
 import br.com.juniorlocadora.dto.FuncionarioDto;
-import br.com.juniorlocadora.dto.PessoaDto;
 import br.com.juniorlocadora.entidades.Funcionario;
 import br.com.juniorlocadora.entidades.Pessoa;
 import br.com.juniorlocadora.repositorio.FuncionarioRepositorio;
@@ -23,12 +22,17 @@ public class FuncionarioServico {
 
     @Transactional
     public FuncionarioDto findById(Long id){
-        Optional<Funcionario> result1 = funcionarioRepositorio.findById(id);
-        Funcionario funcionario = result1.get();
 
-        return new FuncionarioDto(funcionario.getId(), funcionario.getNome(), funcionario.getDataNascimento(),
-                funcionario.getCpf(), funcionario.getSexo(), funcionario.getMatricula());
+        Optional<Pessoa> result1 = pessoaRepositorio.findById(id);
+        Pessoa pessoa = result1.get();
 
+        Optional<Funcionario> result2 = funcionarioRepositorio.findById(id);
+        Funcionario funcionario = result2.get();
 
+        /*
+            return new FuncionarioDto(funcionario.getId(), funcionario.getNome(), funcionario.getDataNascimento(),
+                funcionario.getCpf(), funcionario.getSexo(), funcionario.getMatricula()); */
+
+        return new FuncionarioDto(pessoa, funcionario);
     }
 }
