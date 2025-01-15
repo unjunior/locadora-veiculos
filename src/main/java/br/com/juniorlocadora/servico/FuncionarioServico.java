@@ -6,6 +6,8 @@ import br.com.juniorlocadora.entidades.Pessoa;
 import br.com.juniorlocadora.repositorio.FuncionarioRepositorio;
 import br.com.juniorlocadora.repositorio.PessoaRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,5 +36,13 @@ public class FuncionarioServico {
                 funcionario.getCpf(), funcionario.getSexo(), funcionario.getMatricula()); */
 
         return new FuncionarioDto(pessoa, funcionario);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<FuncionarioDto> findAll(Pageable pageable){
+        Page<Funcionario> result = funcionarioRepositorio.findAll(pageable);
+
+        return result.map(x -> new FuncionarioDto(x.getId(), x.getNome(), x.getDataNascimento(), x.getCpf(),
+                x.getSexo(), x.getMatricula()));
     }
 }
