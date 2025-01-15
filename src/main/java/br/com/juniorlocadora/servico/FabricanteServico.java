@@ -4,6 +4,8 @@ import br.com.juniorlocadora.dto.FabricanteDto;
 import br.com.juniorlocadora.entidades.Fabricante;
 import br.com.juniorlocadora.repositorio.FabricanteRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,5 +22,11 @@ public class FabricanteServico {
         Optional<Fabricante> result = repositorio.findById(id);
         Fabricante fabricante = result.get();
         return new FabricanteDto(fabricante);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<FabricanteDto> findAll(Pageable pageable){
+        Page<Fabricante> result = repositorio.findAll(pageable);
+        return result.map(x -> new FabricanteDto(x));
     }
 }

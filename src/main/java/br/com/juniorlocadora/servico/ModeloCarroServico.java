@@ -4,6 +4,8 @@ import br.com.juniorlocadora.dto.ModeloCarroDto;
 import br.com.juniorlocadora.entidades.ModeloCarro;
 import br.com.juniorlocadora.repositorio.ModeloCarroRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,5 +22,11 @@ public class ModeloCarroServico {
         Optional<ModeloCarro> result = repositorio.findById(id);
         ModeloCarro modelo = result.get();
         return new ModeloCarroDto(modelo);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<ModeloCarroDto> findAll(Pageable pageable){
+        Page<ModeloCarro> result = repositorio.findAll(pageable);
+        return result.map(x -> new ModeloCarroDto(x));
     }
 }

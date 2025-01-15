@@ -4,6 +4,8 @@ import br.com.juniorlocadora.dto.ApoliceSeguroDto;
 import br.com.juniorlocadora.entidades.ApoliceSeguro;
 import br.com.juniorlocadora.repositorio.ApoliceSeguroRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,4 +24,12 @@ public class ApoliceSeguroServico {
         ApoliceSeguroDto dto = new ApoliceSeguroDto(apolice);
         return dto;
     }
+
+    @Transactional(readOnly = true)
+    public Page<ApoliceSeguroDto> findAll(Pageable pageable){
+        Page<ApoliceSeguro> result = repositorio.findAll(pageable);
+        return result.map(x -> new ApoliceSeguroDto(x));
+    }
+
+
 }
