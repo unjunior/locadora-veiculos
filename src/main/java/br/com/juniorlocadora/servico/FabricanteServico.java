@@ -29,4 +29,12 @@ public class FabricanteServico {
         Page<Fabricante> result = repositorio.findAll(pageable);
         return result.map(x -> new FabricanteDto(x));
     }
+
+    @Transactional
+    public FabricanteDto insert(FabricanteDto dto){
+        Fabricante fabricante = new Fabricante();
+        fabricante.setNome(dto.getNome());
+        fabricante = repositorio.save(fabricante);
+        return new FabricanteDto(fabricante);
+    }
 }

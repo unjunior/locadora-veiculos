@@ -29,4 +29,15 @@ public class CarroServico {
         Page<Carro> result = repositorio.findAll(pageable);
         return result.map(x -> new CarroDto(x));
     }
+
+    @Transactional
+    public CarroDto insert(CarroDto dto){
+        Carro carro = new Carro();
+        carro.setCor(dto.getCor());
+        carro.setPlaca(dto.getPlaca());
+        carro.setChassi(dto.getChassi());
+
+        carro = repositorio.save(carro);
+        return new CarroDto(carro);
+    }
 }
