@@ -1,6 +1,8 @@
 package br.com.juniorlocadora.servico;
 
+import br.com.juniorlocadora.dto.AcessorioDto;
 import br.com.juniorlocadora.dto.AluguelDto;
+import br.com.juniorlocadora.entidades.Acessorio;
 import br.com.juniorlocadora.entidades.Aluguel;
 import br.com.juniorlocadora.repositorio.AluguelRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,5 +31,16 @@ public class AluguelServico {
     public Page<AluguelDto> findAll(Pageable pageable){
         Page<Aluguel> result = repositorio.findAll(pageable);
         return result.map(x -> new AluguelDto(x));
+    }
+
+    @Transactional
+    public AluguelDto insert (AluguelDto dto){
+        Aluguel aluguel = new Aluguel();
+        aluguel.setDataPedido(dto.getDataPedido());
+        aluguel.setDataEntrega(dto.getDataEntrega());
+        aluguel.setDataDevolucao(dto.getDataDevolucao());
+        aluguel.setValorTotal(dto.getValorTotal());
+        aluguel = repositorio.save(aluguel);
+        return new AluguelDto(aluguel);
     }
 }

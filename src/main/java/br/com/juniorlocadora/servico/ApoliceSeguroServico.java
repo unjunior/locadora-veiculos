@@ -31,5 +31,15 @@ public class ApoliceSeguroServico {
         return result.map(x -> new ApoliceSeguroDto(x));
     }
 
+    @Transactional
+    public ApoliceSeguroDto insert (ApoliceSeguroDto dto){
+        ApoliceSeguro as = new ApoliceSeguro();
+        as.setValorFranquia(dto.getValorFranquia());
+        as.setProtecaoTerceiro(dto.getProtecaoTerceiro());
+        as.setProtecaoCausasNaturais(dto.getProtecaoCausasNaturais());
+        as.setProtecaoRoubo(dto.getProtecaoRoubo());
 
+        as = repositorio.save(as);
+        return new ApoliceSeguroDto(as);
+    }
 }
