@@ -2,6 +2,7 @@ package br.com.juniorlocadora.servico;
 
 import br.com.juniorlocadora.dto.FuncionarioDto;
 import br.com.juniorlocadora.dto.MotoristaDto;
+import br.com.juniorlocadora.entidades.Funcionario;
 import br.com.juniorlocadora.entidades.Motorista;
 import br.com.juniorlocadora.repositorio.MotoristaRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,5 +32,20 @@ public class MotoristaServico {
         Page<Motorista> result = motoristaRepositorio.findAll(pageable);
         return result.map(x -> new MotoristaDto(x.getId(), x.getNome(), x.getDataNascimento(), x.getCpf(),
                 x.getSexo(), x.getNumeroCnh()));
+    }
+
+    @Transactional
+    public MotoristaDto insert(MotoristaDto dto){
+        Motorista motorista = new Motorista();
+        motorista.setNome(dto.getNome());
+        motorista.setDataNascimento(dto.getDataNascimento());
+        motorista.setCpf(dto.getCpf());
+        motorista.setSexo(dto.getSexo());
+        motorista.setNumeroCnh(dto.getNumeroCnh());
+
+        Motorista novo = motoristaRepositorio.save(motorista);
+
+        return new MotoristaDto(novo.getId(),novo.getNome(), novo.getDataNascimento(),
+                novo.getCpf(), novo.getSexo(), novo.getNumeroCnh());
     }
 }

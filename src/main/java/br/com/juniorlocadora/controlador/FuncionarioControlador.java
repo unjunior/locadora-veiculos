@@ -1,18 +1,19 @@
 package br.com.juniorlocadora.controlador;
 
+import br.com.juniorlocadora.dto.AcessorioDto;
 import br.com.juniorlocadora.dto.FuncionarioDto;
 import br.com.juniorlocadora.servico.FuncionarioServico;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
 
 @RestController
-@RequestMapping(value = "/funcionarios")
+@RequestMapping(value = "/funcionario")
 public class FuncionarioControlador {
 
     @Autowired
@@ -28,5 +29,14 @@ public class FuncionarioControlador {
     public ResponseEntity<Page<FuncionarioDto>> findAll(Pageable pageable){
         Page<FuncionarioDto> funcionarios = servico.findAll(pageable);
         return ResponseEntity.ok().body(funcionarios);
+    }
+
+    @PostMapping
+    public ResponseEntity<FuncionarioDto> insert(@RequestBody FuncionarioDto dto){
+        FuncionarioDto novo = servico.insert(dto);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri()
+                .path("/{id}")
+                .buildAndExpand(novo.getId()).toUri();
+        return ResponseEntity.created(uri).body(novo);
     }
 }

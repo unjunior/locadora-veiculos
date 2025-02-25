@@ -10,14 +10,22 @@ public class FuncionarioDto extends PessoaDto{
 
     private String matricula;
 
-   public FuncionarioDto(Long id, String nome, LocalDate dataNascimento, String cpf, Sexo sexo, String matricula) {
+    public FuncionarioDto(){
+    }
+
+    public FuncionarioDto(Long id, String nome, LocalDate dataNascimento, String cpf, Sexo sexo, String matricula) {
         super(id, nome, dataNascimento, cpf, sexo);
         this.matricula = matricula;
     }
 
-    public FuncionarioDto(Pessoa pessoa, Funcionario funcionario) {
+    public FuncionarioDto(Pessoa pessoa, String matricula) {
         super(pessoa);
-        matricula = funcionario.getMatricula();
+        this.matricula = matricula;
+    }
+
+    public FuncionarioDto(Pessoa pessoa, Funcionario funcionario){
+        super(pessoa);
+        funcionario.getMatricula();
     }
 
     public String getMatricula() {

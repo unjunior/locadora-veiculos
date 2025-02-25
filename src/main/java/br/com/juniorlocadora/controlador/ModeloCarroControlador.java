@@ -13,7 +13,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 
 @RestController
-@RequestMapping(value = "/modelos")
+@RequestMapping(value = "/modelo-carro")
 public class ModeloCarroControlador {
 
     @Autowired

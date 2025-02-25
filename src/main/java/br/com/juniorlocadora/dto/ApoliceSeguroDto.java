@@ -12,12 +12,14 @@ public class ApoliceSeguroDto {
     private Boolean protecaoCausasNaturais;
     private Boolean protecaoRoubo;
 
+
     public ApoliceSeguroDto(Long id, BigDecimal valorFranquia, Boolean protecaoTerceiro, Boolean protecaoCausasNaturais, Boolean protecaoRoubo) {
         this.id = id;
         this.valorFranquia = valorFranquia;
         this.protecaoTerceiro = protecaoTerceiro;
         this.protecaoCausasNaturais = protecaoCausasNaturais;
         this.protecaoRoubo = protecaoRoubo;
+
     }
 
     public ApoliceSeguroDto(ApoliceSeguro apolice) {
@@ -26,6 +28,7 @@ public class ApoliceSeguroDto {
         protecaoTerceiro = apolice.isProtecaoTerceiro();
         protecaoCausasNaturais = apolice.isProtecaoCausasNaturais();
         protecaoRoubo = apolice.isProtecaoRoubo();
+
     }
 
     public Long getId() {
@@ -47,4 +50,5 @@ public class ApoliceSeguroDto {
     public Boolean getProtecaoRoubo() {
         return protecaoRoubo;
     }
+
 }

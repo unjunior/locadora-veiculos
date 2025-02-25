@@ -45,4 +45,19 @@ public class FuncionarioServico {
         return result.map(x -> new FuncionarioDto(x.getId(), x.getNome(), x.getDataNascimento(), x.getCpf(),
                 x.getSexo(), x.getMatricula()));
     }
+
+    @Transactional
+    public FuncionarioDto insert(FuncionarioDto dto){
+        Funcionario func = new Funcionario();
+        func.setNome(dto.getNome());
+        func.setDataNascimento(dto.getDataNascimento());
+        func.setCpf(dto.getCpf());
+        func.setSexo(dto.getSexo());
+        func.setMatricula(dto.getMatricula());
+
+        Funcionario novo = funcionarioRepositorio.save(func);
+
+        return new FuncionarioDto(novo.getId(),novo.getNome(), novo.getDataNascimento(),
+                novo.getCpf(), novo.getSexo(), novo.getMatricula());
+    }
 }

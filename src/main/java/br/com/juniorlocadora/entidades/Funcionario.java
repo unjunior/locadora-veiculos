@@ -29,6 +29,4 @@ public class Funcionario extends Pessoa{
 	public void setMatricula(String matricula) {
 		this.matricula = matricula;
 	}
-	
-	
 }

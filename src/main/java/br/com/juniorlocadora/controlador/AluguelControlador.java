@@ -14,7 +14,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 
 @RestController
-@RequestMapping(value = "/alugueis")
+@RequestMapping(value = "/aluguel")
 public class AluguelControlador {
 
     @Autowired

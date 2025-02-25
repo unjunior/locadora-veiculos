@@ -10,14 +10,22 @@ public class MotoristaDto extends PessoaDto{
 
     private String numeroCnh;
 
+    public MotoristaDto(){
+    }
+
     public MotoristaDto(Long id, String nome, LocalDate dataNascimento, String cpf, Sexo sexo, String numeroCnh) {
         super(id, nome, dataNascimento, cpf, sexo);
         this.numeroCnh = numeroCnh;
     }
 
-    public MotoristaDto(Pessoa pessoa, Motorista motorista) {
+    public MotoristaDto(Pessoa pessoa, String numeroCnh) {
         super(pessoa);
-        numeroCnh = motorista.getNumeroCnh();
+        this.numeroCnh = numeroCnh;
+    }
+
+    public MotoristaDto(Pessoa pessoa, Motorista motorista){
+        super(pessoa);
+        motorista.getNumeroCnh();
     }
 
     public String getNumeroCnh() {

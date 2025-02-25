@@ -13,6 +13,9 @@ public class PessoaDto {
     private String cpf;
     private Sexo sexo;
 
+    public PessoaDto(){
+    }
+
     public PessoaDto(Long id, String nome, LocalDate dataNascimento, String cpf, Sexo sexo) {
         this.id = id;
         this.nome = nome;

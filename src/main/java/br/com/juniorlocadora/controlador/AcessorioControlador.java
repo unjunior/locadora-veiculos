@@ -14,7 +14,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/acessorios")
+@RequestMapping(value = "/acessorio")
 public class AcessorioControlador {
 
     @Autowired
