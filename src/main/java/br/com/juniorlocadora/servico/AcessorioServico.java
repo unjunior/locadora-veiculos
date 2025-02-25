@@ -40,4 +40,12 @@ public class AcessorioServico {
         acessorio = repositorio.save(acessorio);
         return new AcessorioDto(acessorio);
     }
+
+    @Transactional
+    public AcessorioDto update(Long id, AcessorioDto dto){
+        Acessorio acessorio = repositorio.getReferenceById(id);
+        acessorio.setDescricao(dto.getDescricao());
+        acessorio = repositorio.save(acessorio);
+        return new AcessorioDto(acessorio);
+    }
 }

@@ -43,4 +43,16 @@ public class AluguelServico {
         aluguel = repositorio.save(aluguel);
         return new AluguelDto(aluguel);
     }
+
+    @Transactional
+    public AluguelDto update(Long id, AluguelDto dto){
+        Aluguel aluguel = new Aluguel();
+        aluguel.setDataPedido(dto.getDataPedido());
+        aluguel.setDataEntrega(dto.getDataEntrega());
+        aluguel.setDataDevolucao(dto.getDataDevolucao());
+        aluguel.setValorTotal(dto.getValorTotal());
+
+        aluguel = repositorio.save(aluguel);
+        return new AluguelDto(aluguel);
+    }
 }

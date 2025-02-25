@@ -1,6 +1,8 @@
 package br.com.juniorlocadora.servico;
 
+import br.com.juniorlocadora.dto.AluguelDto;
 import br.com.juniorlocadora.dto.ApoliceSeguroDto;
+import br.com.juniorlocadora.entidades.Aluguel;
 import br.com.juniorlocadora.entidades.ApoliceSeguro;
 import br.com.juniorlocadora.repositorio.ApoliceSeguroRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +42,16 @@ public class ApoliceSeguroServico {
         as.setProtecaoRoubo(dto.getProtecaoRoubo());
 
         as = repositorio.save(as);
+        return new ApoliceSeguroDto(as);
+    }
+
+    @Transactional
+    public ApoliceSeguroDto update(Long id, ApoliceSeguroDto dto){
+        ApoliceSeguro as = new ApoliceSeguro();
+        as.setValorFranquia(dto.getValorFranquia());
+        as.setProtecaoTerceiro(dto.getProtecaoTerceiro());
+        as.setProtecaoCausasNaturais(dto.getProtecaoCausasNaturais());
+        as.setProtecaoRoubo(dto.getProtecaoRoubo());
         return new ApoliceSeguroDto(as);
     }
 }

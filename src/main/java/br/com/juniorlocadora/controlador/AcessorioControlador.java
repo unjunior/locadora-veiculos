@@ -41,4 +41,10 @@ public class AcessorioControlador {
                 .buildAndExpand(dto.getId()).toUri();
         return ResponseEntity.created(uri).body(dto);
     }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<AcessorioDto> uppdate(@PathVariable Long id, @RequestBody AcessorioDto dto){
+        dto = servico.update(id, dto);
+        return ResponseEntity.ok(dto);
+    }
 }

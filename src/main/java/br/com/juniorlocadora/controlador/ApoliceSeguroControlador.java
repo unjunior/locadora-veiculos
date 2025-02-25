@@ -40,4 +40,10 @@ public class ApoliceSeguroControlador {
                 .buildAndExpand(dto.getId()).toUri();
         return ResponseEntity.created(uri).body(dto);
     }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<ApoliceSeguroDto> update (@PathVariable Long id, @RequestBody ApoliceSeguroDto dto){
+        dto = servico.update(id, dto);
+        return ResponseEntity.ok(dto);
+    }
 }
